@@ -68,8 +68,9 @@ public class SecondActivity extends AppCompatActivity {
             resultIntent.putExtra("numeroUno", numeroUno);
             resultIntent.putExtra("numeroDos", numeroDos);
             setResult(RESULT_OK, resultIntent);
+
             if (nombre.isEmpty() || apellido.isEmpty()) {
-                Toast.makeText(this, "Los campos no pueden estar vacíos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Los campos nombre y apellido deben estar llenos", Toast.LENGTH_SHORT).show();
                 return;
             }
             finish();
