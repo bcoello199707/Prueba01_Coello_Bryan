@@ -26,10 +26,7 @@ public class MainActivity extends AppCompatActivity {
                     numeroUno = data.getIntExtra("numeroUno", 0);
                     numeroDos = data.getIntExtra("numeroDos", 0);
 
-                    etNombre.setText(nombre);
-                    etApellido.setText(apellido);
-                    etNumeroUno.setText(String.valueOf(numeroUno));
-                    etNumeroDos.setText(String.valueOf(numeroDos));
+
 
                     btnResultados.setEnabled(true);
                 }
@@ -57,7 +54,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnResultados.setOnClickListener(v -> {
-
+            etNombre.setText(nombre);
+            etApellido.setText(apellido);
+            etNumeroUno.setText(String.valueOf(numeroUno));
+            etNumeroDos.setText(String.valueOf(numeroDos));
             int multiplicacion = 0;
             for (int i = 0; i < numeroDos; i++) {
                 multiplicacion += numeroUno;
