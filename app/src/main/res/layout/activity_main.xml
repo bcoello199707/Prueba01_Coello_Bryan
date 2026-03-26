@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText android:id="@+id/etNombre" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Nombres" android:enabled="false"/>
+    <EditText android:id="@+id/etApellido" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Apellidos" android:enabled="false"/>
+    <EditText android:id="@+id/etDividendo" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Dividendo" android:enabled="false"/>
+    <EditText android:id="@+id/etDivisor" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Divisor" android:enabled="false"/>
+    <EditText android:id="@+id/etParteEntera" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Parte Entera" android:enabled="false"/>
+    <EditText android:id="@+id/etResiduo" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Residuo" android:enabled="false"/>
+    <EditText android:id="@+id/etNumInvertido" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Num. Invertido" android:enabled="false"/>
+
+    <Button android:id="@+id/btnSiguiente" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Siguiente"/>
+    <Button android:id="@+id/btnResultados" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Mostrar Resultados" android:enabled="false"/>
+</LinearLayout>
