@@ -10,24 +10,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SecondActivity extends AppCompatActivity {
 
-    private EditText etNombre, etApellido, etDividendo, etDivisor, etNum;
+    private EditText etNombre, etApellido, etNumeroUno, etNumeroDos;
     private Button btnSiguiente, btnCerrar;
     private String nombre, apellido;
-    private int dividendo, divisor, num;
+    private int numeroUno, numeroDos;
 
     private final ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                     Intent data = result.getData();
-                    dividendo = data.getIntExtra("dividendo", 0);
-                    divisor = data.getIntExtra("divisor", 0);
-                    num = data.getIntExtra("num", 0);
+                    numeroUno = data.getIntExtra("numeroUno", 0);
+                    numeroDos = data.getIntExtra("numeroDos", 0);
 
-                    etDividendo.setText(String.valueOf(dividendo));
-                    etDivisor.setText(String.valueOf(divisor));
-                    etNum.setText(String.valueOf(num));
+                    etNumeroUno.setText(String.valueOf(numeroUno));
+                    etNumeroDos.setText(String.valueOf(numeroDos));
 
+                    // Activar para ingresar nombres y apellidos solo cuando viene de la tercera pantalla
+                    etNombre.setEnabled(true);
+                    etApellido.setEnabled(true);
                     btnCerrar.setEnabled(true);
                 }
             }
@@ -40,9 +41,8 @@ public class SecondActivity extends AppCompatActivity {
 
         etNombre = findViewById(R.id.etNombre2);
         etApellido = findViewById(R.id.etApellido2);
-        etDividendo = findViewById(R.id.etDividendo2);
-        etDivisor = findViewById(R.id.etDivisor2);
-        etNum = findViewById(R.id.etNum2);
+        etNumeroUno = findViewById(R.id.etNumeroUno2);
+        etNumeroDos = findViewById(R.id.etNumeroDos2);
         btnSiguiente = findViewById(R.id.btnSiguiente2);
         btnCerrar = findViewById(R.id.btnCerrar2);
 
@@ -57,12 +57,14 @@ public class SecondActivity extends AppCompatActivity {
         });
 
         btnCerrar.setOnClickListener(v -> {
+            nombre = etNombre.getText().toString();
+            apellido = etApellido.getText().toString();
+
             Intent resultIntent = new Intent();
             resultIntent.putExtra("nombre", nombre);
             resultIntent.putExtra("apellido", apellido);
-            resultIntent.putExtra("dividendo", dividendo);
-            resultIntent.putExtra("divisor", divisor);
-            resultIntent.putExtra("num", num);
+            resultIntent.putExtra("numeroUno", numeroUno);
+            resultIntent.putExtra("numeroDos", numeroDos);
             setResult(RESULT_OK, resultIntent);
             finish();
         });

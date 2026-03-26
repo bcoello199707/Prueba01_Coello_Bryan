@@ -10,11 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText etNombre, etApellido, etDividendo, etDivisor, etParteEntera, etResiduo, etNumInvertido;
+    private EditText etNombre, etApellido, etNumeroUno, etNumeroDos, etMultiplicacion, etPotencia, etFactorial;
     private Button btnSiguiente, btnResultados;
 
     private String nombre, apellido;
-    private int dividendo, divisor, num;
+    private int numeroUno, numeroDos;
 
     private final ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -23,9 +23,13 @@ public class MainActivity extends AppCompatActivity {
                     Intent data = result.getData();
                     nombre = data.getStringExtra("nombre");
                     apellido = data.getStringExtra("apellido");
-                    dividendo = data.getIntExtra("dividendo", 0);
-                    divisor = data.getIntExtra("divisor", 0);
-                    num = data.getIntExtra("num", 0);
+                    numeroUno = data.getIntExtra("numeroUno", 0);
+                    numeroDos = data.getIntExtra("numeroDos", 0);
+
+                    etNombre.setText(nombre);
+                    etApellido.setText(apellido);
+                    etNumeroUno.setText(String.valueOf(numeroUno));
+                    etNumeroDos.setText(String.valueOf(numeroDos));
 
                     btnResultados.setEnabled(true);
                 }
@@ -39,11 +43,11 @@ public class MainActivity extends AppCompatActivity {
 
         etNombre = findViewById(R.id.etNombre);
         etApellido = findViewById(R.id.etApellido);
-        etDividendo = findViewById(R.id.etDividendo);
-        etDivisor = findViewById(R.id.etDivisor);
-        etParteEntera = findViewById(R.id.etParteEntera);
-        etResiduo = findViewById(R.id.etResiduo);
-        etNumInvertido = findViewById(R.id.etNumInvertido);
+        etNumeroUno = findViewById(R.id.etNumeroUno);
+        etNumeroDos = findViewById(R.id.etNumeroDos);
+        etMultiplicacion = findViewById(R.id.etMultiplicacion);
+        etPotencia = findViewById(R.id.etPotencia);
+        etFactorial = findViewById(R.id.etFactorial);
         btnSiguiente = findViewById(R.id.btnSiguiente);
         btnResultados = findViewById(R.id.btnResultados);
 
@@ -53,48 +57,34 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnResultados.setOnClickListener(v -> {
-            etNombre.setText(nombre);
-            etApellido.setText(apellido);
-            etDividendo.setText(String.valueOf(dividendo));
-            etDivisor.setText(String.valueOf(divisor));
-
-            // Division and Residuo using only additions/subtractions
-            int cociente = 0;
-            int residuo = dividendo;
-            if (divisor > 0) {
-                while (residuo >= divisor) {
-                    residuo -= divisor;
-                    cociente++;
-                }
-            } else if (divisor < 0) {
-                // Handling negative divisor if necessary, but assuming positive for simplicity
+            // Multiplicación usando solo sumas: numeroUno * numeroDos
+            int multiplicacion = 0;
+            for (int i = 0; i < numeroDos; i++) {
+                multiplicacion += numeroUno;
             }
+            etMultiplicacion.setText(String.valueOf(multiplicacion));
 
-            etParteEntera.setText(String.valueOf(cociente));
-            etResiduo.setText(String.valueOf(residuo));
-
-            // Invert number mathematically using only additions/subtractions for division/modulo logic
-            int invertido = 0;
-            int auxNum = num;
-            while (auxNum > 0) {
-                int q = 0;
-                int r = auxNum;
-                // Find auxNum / 10 and auxNum % 10 using subtractions
-                while (r >= 10) {
-                    r -= 10;
-                    q++;
+            // Potencia usando solo sumas: numeroUno ^ numeroDos
+            int potencia = 1;
+            for (int i = 0; i < numeroDos; i++) {
+                int tempPotencia = 0;
+                for (int j = 0; j < numeroUno; j++) {
+                    tempPotencia += potencia;
                 }
-                // r is now auxNum % 10, q is now auxNum / 10
-                
-                // invertido = (invertido * 10) + r using only additions
-                int tempInvertido = 0;
-                for (int i = 0; i < 10; i++) {
-                    tempInvertido += invertido;
-                }
-                invertido = tempInvertido + r;
-                auxNum = q;
+                potencia = tempPotencia;
             }
-            etNumInvertido.setText(String.valueOf(invertido));
+            etPotencia.setText(String.valueOf(potencia));
+
+            // Factorial usando solo sumas: numeroUno!
+            int factorial = 1;
+            for (int i = 1; i <= numeroUno; i++) {
+                int tempFactorial = 0;
+                for (int j = 0; j < i; j++) {
+                    tempFactorial += factorial;
+                }
+                factorial = tempFactorial;
+            }
+            etFactorial.setText(String.valueOf(factorial));
         });
     }
 }

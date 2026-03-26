@@ -4,11 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ThirdActivity extends AppCompatActivity {
 
-    private EditText etNombre, etApellido, etDividendo, etDivisor, etNum;
+    private EditText etNombre, etApellido, etNumeroUno, etNumeroDos;
     private Button btnCerrar;
 
     @Override
@@ -18,9 +19,8 @@ public class ThirdActivity extends AppCompatActivity {
 
         etNombre = findViewById(R.id.etNombre3);
         etApellido = findViewById(R.id.etApellido3);
-        etDividendo = findViewById(R.id.etDividendo3);
-        etDivisor = findViewById(R.id.etDivisor3);
-        etNum = findViewById(R.id.etNum3);
+        etNumeroUno = findViewById(R.id.etNumeroUno3);
+        etNumeroDos = findViewById(R.id.etNumeroDos3);
         btnCerrar = findViewById(R.id.btnCerrar3);
 
         String nombre = getIntent().getStringExtra("nombre");
@@ -29,22 +29,32 @@ public class ThirdActivity extends AppCompatActivity {
         etApellido.setText(apellido);
 
         btnCerrar.setOnClickListener(v -> {
-            int dividendo = 0;
-            int divisor = 0;
-            int num = 0;
-            
-            try {
-                dividendo = Integer.parseInt(etDividendo.getText().toString());
-                divisor = Integer.parseInt(etDivisor.getText().toString());
-                num = Integer.parseInt(etNum.getText().toString());
-            } catch (NumberFormatException ignored) {}
+            String sNum1 = etNumeroUno.getText().toString();
+            String sNum2 = etNumeroDos.getText().toString();
 
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra("dividendo", dividendo);
-            resultIntent.putExtra("divisor", divisor);
-            resultIntent.putExtra("num", num);
-            setResult(RESULT_OK, resultIntent);
-            finish();
+            if (sNum1.isEmpty() || sNum2.isEmpty()) {
+                Toast.makeText(this, "Los campos no pueden estar vacíos", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            try {
+                int num1 = Integer.parseInt(sNum1);
+                int num2 = Integer.parseInt(sNum2);
+
+                if (num1 <= 0 || num2 <= 0) {
+                    Toast.makeText(this, "Los números no pueden ser ceros ni negativos", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("numeroUno", num1);
+                resultIntent.putExtra("numeroDos", num2);
+                setResult(RESULT_OK, resultIntent);
+                finish();
+
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Ingrese números válidos", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }
