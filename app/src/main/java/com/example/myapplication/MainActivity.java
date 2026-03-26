@@ -57,14 +57,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnResultados.setOnClickListener(v -> {
-            // Multiplicación usando solo sumas: numeroUno * numeroDos
+
             int multiplicacion = 0;
             for (int i = 0; i < numeroDos; i++) {
                 multiplicacion += numeroUno;
             }
             etMultiplicacion.setText(String.valueOf(multiplicacion));
 
-            // Potencia usando solo sumas: numeroUno ^ numeroDos
+
             int potencia = 1;
             for (int i = 0; i < numeroDos; i++) {
                 int tempPotencia = 0;
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             }
             etPotencia.setText(String.valueOf(potencia));
 
-            // Factorial usando solo sumas: numeroUno!
+
             int factorial = 1;
             for (int i = 1; i <= numeroUno; i++) {
                 int tempFactorial = 0;

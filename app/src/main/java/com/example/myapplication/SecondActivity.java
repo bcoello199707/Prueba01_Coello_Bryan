@@ -26,7 +26,7 @@ public class SecondActivity extends AppCompatActivity {
                     etNumeroUno.setText(String.valueOf(numeroUno));
                     etNumeroDos.setText(String.valueOf(numeroDos));
 
-                    // Activar para ingresar nombres y apellidos solo cuando viene de la tercera pantalla
+
                     etNombre.setEnabled(true);
                     etApellido.setEnabled(true);
                     btnCerrar.setEnabled(true);
