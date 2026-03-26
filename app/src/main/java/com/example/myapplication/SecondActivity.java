@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -66,6 +68,10 @@ public class SecondActivity extends AppCompatActivity {
             resultIntent.putExtra("numeroUno", numeroUno);
             resultIntent.putExtra("numeroDos", numeroDos);
             setResult(RESULT_OK, resultIntent);
+            if (nombre.isEmpty() || apellido.isEmpty()) {
+                Toast.makeText(this, "Los campos no pueden estar vacíos", Toast.LENGTH_SHORT).show();
+                return;
+            }
             finish();
         });
     }
